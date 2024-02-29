@@ -1,17 +1,18 @@
+// NameForm.js
 import React, { useState } from 'react';
 
 const NameForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [fullName, setFullName] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (firstName && lastName) {
+    if (firstName.trim() !== '' && lastName.trim() !== '') {
       const fullName = `${firstName} ${lastName}`;
       setFullName(fullName);
-      setIsSubmitted(true);
+      setSubmitted(true);
     } else {
       alert('Please fill in both first name and last name.');
     }
@@ -21,29 +22,31 @@ const NameForm = () => {
     <div>
       <form onSubmit={handleSubmit}>
         <label>
-          First Name:
+          First Name*:
           <input
             type="text"
             value={firstName}
-            onChange={(event) => setFirstName(event.target.value)}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
           />
         </label>
         <br />
         <label>
-          Last Name:
+          Last Name*:
           <input
             type="text"
             value={lastName}
-            onChange={(event) => setLastName(event.target.value)}
+            onChange={(e) => setLastName(e.target.value)}
+            required
           />
         </label>
         <br />
         <button type="submit">Submit</button>
       </form>
-      {isSubmitted && (
+      {submitted && (
         <div>
-          <h3>Full Name:</h3><p>{fullName}</p>
-          
+          <h2>Full Name:</h2>
+          <p>{fullName}</p>
         </div>
       )}
     </div>
