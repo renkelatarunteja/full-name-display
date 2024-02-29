@@ -3,27 +3,17 @@ import React, { useState } from 'react';
 const NameForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [firstNameError, setFirstNameError] = useState('');
-  const [lastNameError, setLastNameError] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (firstName && lastName) {
       const fullName = `${firstName} ${lastName}`;
+      setFullName(fullName);
       setIsSubmitted(true);
     } else {
-      if (!firstName) {
-        setFirstNameError('First name is required.');
-      } else {
-        setFirstNameError('');
-      }
-      if (!lastName) {
-        setLastNameError('Last name is required.');
-      } else {
-        setLastNameError('');
-      }
-      setIsSubmitted(false);
+      alert('Please fill in both first name and last name.');
     }
   };
 
@@ -35,12 +25,8 @@ const NameForm = () => {
           <input
             type="text"
             value={firstName}
-            onChange={(event) => {
-              setFirstName(event.target.value);
-              setFirstNameError('');
-            }}
+            onChange={(event) => setFirstName(event.target.value)}
           />
-          <span style={{ color: 'red' }}>{firstNameError}</span>
         </label>
         <br />
         <label>
@@ -48,20 +34,16 @@ const NameForm = () => {
           <input
             type="text"
             value={lastName}
-            onChange={(event) => {
-              setLastName(event.target.value);
-              setLastNameError('');
-            }}
+            onChange={(event) => setLastName(event.target.value)}
           />
-          <span style={{ color: 'red' }}>{lastNameError}</span>
         </label>
         <br />
         <button type="submit">Submit</button>
       </form>
       {isSubmitted && (
         <div>
-          <h3>Full Name:</h3>
-          <p>{`${firstName} ${lastName}`}</p>
+          <h3>Full Name:</h3><p>{fullName}</p>
+          
         </div>
       )}
     </div>
@@ -69,4 +51,3 @@ const NameForm = () => {
 };
 
 export default NameForm;
-
