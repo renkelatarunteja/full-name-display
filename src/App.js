@@ -1,14 +1,18 @@
+// App.js
 import React from 'react';
-import NameForm from './NameForm';
 import './App.css';
+import NameForm from './NameForm';
 
 function App() {
   return (
     <div className="App">
-      <h1>Enter Your Name</h1>
-      <NameForm />
+      <header className="App-header">
+        <h1>Display Name App</h1>
+        <NameForm />
+      </header>
     </div>
   );
 }
 
 export default App;
+
